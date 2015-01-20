@@ -23,6 +23,7 @@ suite('SQL', function() {
     testsql({id: 1}, {
       default: 'WHERE `id` = 1',
       postgres: 'WHERE "id" = 1',
+      mssql: 'WHERE [id] = 1'
     });
   });
 
@@ -37,7 +38,8 @@ suite('SQL', function() {
       $or: ['maker@mhansen.io', 'janzeh@gmail.com']
     }, {
       default: "(`email` = 'maker@mhansen.io' OR `email` = 'janzeh@gmail.com')",
-      postgres: '("email" = \'maker@mhansen.io\' OR "email" = \'janzeh@gmail.com\')'
+      postgres: '("email" = \'maker@mhansen.io\' OR "email" = \'janzeh@gmail.com\')',
+      mssql: '([email] = \'maker@mhansen.io\' OR [email] = \'janzeh@gmail.com\')'
     });
 
     testsql('$or', [
@@ -45,7 +47,8 @@ suite('SQL', function() {
       {email: 'janzeh@gmail.com'}
     ], {
       default: "(`email` = 'maker@mhansen.io' OR `email` = 'janzeh@gmail.com')",
-      postgres: '("email" = \'maker@mhansen.io\' OR "email" = \'janzeh@gmail.com\')'
+      postgres: '("email" = \'maker@mhansen.io\' OR "email" = \'janzeh@gmail.com\')',
+      mssql: '([email] = \'maker@mhansen.io\' OR [email] = \'janzeh@gmail.com\')'
     });
 
     testsql('$or', {
@@ -53,7 +56,8 @@ suite('SQL', function() {
       name: 'Mick Hansen'
     }, {
       default: "(`email` = 'maker@mhansen.io' OR `name` = 'Mick Hansen')",
-      postgres: '("email" = \'maker@mhansen.io\' OR "name" = \'Mick Hansen\')'
+      postgres: '("email" = \'maker@mhansen.io\' OR "name" = \'Mick Hansen\')',
+      mssql: '([email] = \'maker@mhansen.io\' OR [name] = \'Mick Hansen\')'
     });
   });
 });
