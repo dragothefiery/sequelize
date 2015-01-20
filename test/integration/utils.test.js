@@ -149,7 +149,7 @@ describe(Support.getTestDialectTeaser('Utils'), function() {
 
   if (Support.getTestDialect() === 'postgres') {
     describe('json', function() {
-      var queryGenerator = require('../lib/dialects/postgres/query-generator.js');
+      var queryGenerator = require('../../lib/dialects/postgres/query-generator.js');
 
       it('successfully parses a complex nested condition hash', function() {
         var conditions = {
