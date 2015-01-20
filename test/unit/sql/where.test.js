@@ -1,9 +1,11 @@
 'use strict';
 
-var Support = require(__dirname + '/../../support')
+var Support = require(__dirname + '/../support')
   , testsql = Support.testsql
   , current = Support.sequelize
   , sql     = current.dialect.QueryGenerator;
+
+Support.noDatabase = true;
 
 suite('SQL', function() {
   suite('whereQuery', function () {
