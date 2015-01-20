@@ -3,7 +3,7 @@
 var chai = require('chai')
   , expect = chai.expect
   , Support = require(__dirname + '/../../support')
-  , DataTypes = require(__dirname + '/../../../lib/data-types')
+  , DataTypes = require(__dirname + '/../../../../lib/data-types')
   , config = require(__dirname + '/../../config/config');
 
 chai.config.includeStack = true;

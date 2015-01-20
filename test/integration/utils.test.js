@@ -3,7 +3,7 @@
 var chai = require('chai')
   , spies = require('chai-spies')
   , expect = chai.expect
-  , Utils = require(__dirname + '/../lib/utils')
+  , Utils = require(__dirname + '/../../lib/utils')
   , Support = require(__dirname + '/support');
 
 chai.use(spies);

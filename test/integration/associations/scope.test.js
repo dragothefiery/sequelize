@@ -4,7 +4,7 @@ var chai = require('chai')
   , expect = chai.expect
   , Support = require(__dirname + '/../support')
   , DataTypes = require(__dirname + '/../../../lib/data-types')
-  , Sequelize = require('../../index')
+  , Sequelize = require('../../../index')
   , Promise = Sequelize.Promise
   , assert = require('assert');
 

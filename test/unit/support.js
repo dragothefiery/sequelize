@@ -52,18 +52,11 @@ var Support = {
     options.dialect = options.dialect || this.getTestDialect();
     return new Sequelize(db, user, pass, options);
   },
+
   getSupportedDialects: function() {
-    return fs.readdirSync(__dirname + '/../lib/dialects').filter(function(file) {
+    return fs.readdirSync(__dirname + '/../../lib/dialects').filter(function(file) {
       return ((file.indexOf('.js') === -1) && (file.indexOf('abstract') === -1));
     });
-  },
-
-  checkMatchForDialects: function(dialect, value, expectations) {
-    if (!!expectations[dialect]) {
-      expect(value).to.match(expectations[dialect]);
-    } else {
-      throw new Error('Undefined expectation for "' + dialect + '"!');
-    }
   },
 
   getTestDialect: function() {
@@ -78,29 +71,6 @@ var Support = {
     }
 
     return envDialect;
-  },
-
-  dialectIsMySQL: function(strict) {
-    var envDialect = process.env.DIALECT || 'mysql';
-    if (strict === undefined) {
-      strict = false;
-    }
-
-    if (strict) {
-      return envDialect === 'mysql';
-    } else {
-      return ['mysql', 'mariadb'].indexOf(envDialect) !== -1;
-    }
-  },
-
-  getTestDialectTeaser: function(moduleName) {
-    var dialect = this.getTestDialect();
-
-    if (process.env.DIALECT === 'postgres-native') {
-      dialect = 'postgres-native';
-    }
-
-    return '[' + dialect.toUpperCase() + '] ' + moduleName;
   },
 
   getTestUrl: function(config) {
@@ -130,10 +100,6 @@ var Support = {
 
 var sequelize = Support.sequelize = Support.createSequelizeInstance();
 
-// For Postgres' HSTORE functionality and to properly execute it's commands we'll need this...
-before(function() {
-  var dialect = Support.getTestDialect();
-});
 
 beforeEach(function() {
   this.sequelize = sequelize;
