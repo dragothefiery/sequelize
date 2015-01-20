@@ -1,33 +1,58 @@
 'use strict';
 
-var Support = require(__dirname + '/../support')
-  , testsql = Support.testsql
-  , current = Support.sequelize
-  , sql     = current.dialect.QueryGenerator;
+var Support   = require(__dirname + '/../support')
+  , util      = require('util')
+  , expectsql = Support.expectsql
+  , current   = Support.sequelize
+  , sql       = current.dialect.QueryGenerator;
 
 Support.noDatabase = true;
 
 suite('SQL', function() {
   suite('whereQuery', function () {
-    test('{}', function () {
-      testsql(sql.whereQuery({}), {
-        default: ''
+    var testsql = function (params, expectation) {
+      test(util.inspect(params), function () {
+        return expectsql(sql.whereQuery(params), expectation);
       });
+    };
+
+    testsql({}, {
+      default: ''
     });
-    test('[]', function () {
-      testsql(sql.whereQuery({}), {
-        default: ''
-      });
+    testsql([], {
+      default: ''
     });
-    test('{id: 1}', function () {
-      testsql(sql.whereQuery({id: 1}), {
-        default: 'WHERE `id` = 1',
-        postgres: 'WHERE "id" = 1',
-      });
+    testsql({id: 1}, {
+      default: 'WHERE `id` = 1',
+      postgres: 'WHERE "id" = 1',
     });
   });
 
   suite('whereItemQuery', function () {
+    var testsql = function (key, value, expectation) {
+      test(key+": "+util.inspect(value), function () {
+        return expectsql(sql.whereItemQuery(key, value), expectation);
+      });
+    };
 
+    testsql('email', {
+      $or: ['maker@mhansen.io', 'janzeh@gmail.com']
+    }, {
+      default: "(`email` = 'maker@mhansen.io' OR `email` = 'janzeh@gmail.com')"
+    });
+
+    testsql('$or', [
+      {email: 'maker@mhansen.io'},
+      {email: 'janzeh@gmail.com'}
+    ], {
+      default: "(`email` = 'maker@mhansen.io' OR `email` = 'janzeh@gmail.com')"
+    });
+
+    testsql('$or', {
+      email: 'maker@mhansen.io',
+      name: 'Mick Hansen'
+    }, {
+      default: "(`email` = 'maker@mhansen.io' OR `name` = 'Mick Hansen')"
+    });
   });
 });

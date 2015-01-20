@@ -92,7 +92,7 @@ var Support = {
     return url;
   },
 
-  testsql: function(query, expectations) {
+  expectsql: function(query, expectations) {
     var expectation = expectations[Support.sequelize.dialect.name] || expectations['default'];
     expect(query).to.equal(expectation);
   }
