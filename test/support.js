@@ -189,6 +189,11 @@ var Support = {
       + '@' + dbConfig.host + ':' + dbConfig.port + '/' + dbConfig.database;
     }
     return url;
+  },
+
+  testsql: function(query, expectations) {
+    var expectation = expectations[Support.sequelize.dialect.name] || expectations['default'];
+    expect(query).to.equal(expectation);
   }
 };
 
