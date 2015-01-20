@@ -46,6 +46,8 @@ var Support = {
     if (dialect === 'sqlite') {
       var p = path.join(__dirname, 'tmp', 'db.sqlite');
 
+      console.log(p);
+
       return new Sequelize.Promise(function(resolve, reject) {
         // We cannot promisify exists, since exists does not follow node callback convention - first argument is a boolean, not an error / null
         if (fs.existsSync(p)) {
@@ -216,7 +218,6 @@ before(function() {
 beforeEach(function() {
   this.sequelize = Support.sequelize;
 
-  console.log(Support.noConnection);
   return Support.clearDatabase(this.sequelize);
 });
 
