@@ -30,7 +30,7 @@ jshint:
 
 cover:
 	rm -rf coverage \
-	make teaser && ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- -t 10000 $(TESTS); \
+	make teaser && ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --ui tdd --report lcovonly -- -t 10000 $(TESTS); \
 
 mariadb:
 	@DIALECT=mariadb make test
