@@ -209,12 +209,14 @@ before(function() {
   if (dialect !== 'postgres' && dialect !== 'postgres-native') {
     return;
   }
-
+  Support.noConnection = false;
   return Support.sequelize.query('CREATE EXTENSION IF NOT EXISTS hstore', null, {raw: true});
 });
 
 beforeEach(function() {
   this.sequelize = Support.sequelize;
+
+  console.log(Support.noConnection);
   return Support.clearDatabase(this.sequelize);
 });
 

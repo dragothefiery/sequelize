@@ -7,7 +7,7 @@ var Support   = require(__dirname + '/../support')
   , sql       = current.dialect.QueryGenerator;
 
 suite('SQL', function() {
-  setup(function () {
+  suiteSetup(function () {
     Support.noDatabase = true;
   });
 
@@ -40,21 +40,24 @@ suite('SQL', function() {
     testsql('email', {
       $or: ['maker@mhansen.io', 'janzeh@gmail.com']
     }, {
-      default: "(`email` = 'maker@mhansen.io' OR `email` = 'janzeh@gmail.com')"
+      default: "(`email` = 'maker@mhansen.io' OR `email` = 'janzeh@gmail.com')",
+      postgres: '("email" = \'maker@mhansen.io\' OR "email" = \'janzeh@gmail.com\')'
     });
 
     testsql('$or', [
       {email: 'maker@mhansen.io'},
       {email: 'janzeh@gmail.com'}
     ], {
-      default: "(`email` = 'maker@mhansen.io' OR `email` = 'janzeh@gmail.com')"
+      default: "(`email` = 'maker@mhansen.io' OR `email` = 'janzeh@gmail.com')",
+      postgres: '("email" = \'maker@mhansen.io\' OR "email" = \'janzeh@gmail.com\')'
     });
 
     testsql('$or', {
       email: 'maker@mhansen.io',
       name: 'Mick Hansen'
     }, {
-      default: "(`email` = 'maker@mhansen.io' OR `name` = 'Mick Hansen')"
+      default: "(`email` = 'maker@mhansen.io' OR `name` = 'Mick Hansen')",
+      postgres: '("email" = \'maker@mhansen.io\' OR "name" = \'Mick Hansen\')'
     });
   });
 });
