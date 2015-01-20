@@ -6,9 +6,11 @@ var Support   = require(__dirname + '/../support')
   , current   = Support.sequelize
   , sql       = current.dialect.QueryGenerator;
 
-Support.noDatabase = true;
-
 suite('SQL', function() {
+  setup(function () {
+    Support.noDatabase = true;
+  });
+
   suite('whereQuery', function () {
     var testsql = function (params, expectation) {
       test(util.inspect(params), function () {

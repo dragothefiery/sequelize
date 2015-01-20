@@ -4,7 +4,7 @@ var chai = require('chai')
   , expect = chai.expect
   , Sequelize = require(__dirname + '/../../index')
   , Support = require(__dirname + '/support')
-  , config = require(__dirname + '/config/config');
+  , config = require(__dirname + '/../config/config');
 
 chai.config.includeStack = true;
 

@@ -7,7 +7,7 @@ var chai = require('chai')
   , dialect = Support.getTestDialect()
   , DataTypes = require(__dirname + '/../../../lib/data-types')
   , datetime = require('chai-datetime')
-  , config = require(__dirname + '/../config/config')
+  , config = require(__dirname + '/../../config/config')
   , current = Support.sequelize;
 
 chai.use(datetime);

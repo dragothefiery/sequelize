@@ -2,7 +2,7 @@
 
 var chai = require('chai')
   , expect = chai.expect
-  , config = require(__dirname + '/config/config')
+  , config = require(__dirname + '/../config/config')
   , Support = require(__dirname + '/support')
   , dialect = Support.getTestDialect()
   , Sequelize = require(__dirname + '/../../index');
